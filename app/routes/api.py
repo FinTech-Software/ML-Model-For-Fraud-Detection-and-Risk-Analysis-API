@@ -1,10 +1,15 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect
 from app.utils.model_utils import FraudDetectionModel
 from config import Config
+from app.models.gemini_predictor import GeminiPredictor
 import time
 
 bp = Blueprint('api', __name__)
 model = FraudDetectionModel(Config.MODEL_PATH)
+
+@bp.route('/streamlit', methods=['GET'])
+def launch_streamlit():
+    return redirect("https://ml-model-for-fraud-detection-and-risk.onrender.com")
 
 @bp.route('/predict', methods=['POST'])
 def predict():
@@ -55,6 +60,54 @@ def predict():
         'prediction': result['prediction'],
         'probability': result['probability'],
         'label': 'Fraud' if result['prediction'] == 1 else 'Legitimate',
+        'status': 'success'
+    })
+
+@bp.route('/ai-prediction', methods=['POST'])
+def ai_prediction():
+    if not request.is_json:
+        return jsonify({
+            'error': 'Request must be JSON',
+            'status': 'error'
+        }), 400
+
+    data = request.get_json()
+
+    # Required fields validation
+    required_fields = [
+        'Transaction_Amount', 'Account_Balance', 'IP_Address_Flag',
+        'Daily_Transaction_Count', 'Avg_Transaction_Amount_7d',
+        'Failed_Transaction_Count_7d', 'Transaction_Distance',
+        'Risk_Score', 'Amount_to_Balance_Ratio', 'Amount_Deviation'
+    ]
+    missing_fields = [field for field in required_fields if field not in data]
+    if missing_fields:
+        return jsonify({
+            'error': f'Missing required fields: {", ".join(missing_fields)}',
+            'status': 'error'
+        }), 400
+
+    # Optional defaults
+    optional_fields = {
+        'Previous_Fraudulent_Activity': 0,
+        'Is_Weekend': 0,
+        'Hour': 12,
+        'DayOfWeek': 3,
+        'Is_Night': 0,
+        'High_Risk_Category': 0
+    }
+    for field, default in optional_fields.items():
+        data.setdefault(field, default)
+
+    gemini = GeminiPredictor()
+    result = gemini.analyze_transaction(data)
+
+    if result['status'] == 'error':
+        return jsonify(result), 500
+
+    return jsonify({
+        'prediction': result['prediction'],
+        'explanation': result['explanation'],
         'status': 'success'
     })
 
