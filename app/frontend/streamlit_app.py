@@ -19,7 +19,7 @@ st.set_page_config(
 st.markdown("""
     <style>
     .custom-header {
-        background: linear-gradient(to right, #2e8b57, #3cb371);
+        background: linear-gradient(to right, #60629f, #32d16f);
         padding: 2rem;
         border-radius: 12px;
         text-align: center;
@@ -49,28 +49,28 @@ st.markdown("""
     }
     @media (prefers-color-scheme: dark) {
         .fraud-box {
-            background-color: #2a0000;
-            color: #ff9999;
-            border-left: 8px solid #ff3333;
+            background-color: #ff0000;
+            color: rgb(255, 255, 255);
+            border-left: 8px solid #ffc333;
         }
         .legit-box {
-            background-color: #042f1a;
-            color: #ccffe0;
-            border-left: 8px solid #00ff99;
+            background-color: #03ff84;
+            color: #025c00;
+            border-left: 8px solid rgb(15 139 255);
         }
     }
 
     .explanation-box {
-        background: #eaf4ff;
-        padding: 15px;
-        border-radius: 10px;
+        padding: 20px;
+        border-radius: 18px;
         white-space: pre-wrap;
-        font-family: monospace;
+        font-family: cursive;
+        font-size: x-large;
     }
     @media (prefers-color-scheme: dark) {
         .explanation-box {
-            background: #0b2a40;
-            color: #d0e7ff;
+            background: #2673a9;
+            color: #ffffff;
         }
     }
 
