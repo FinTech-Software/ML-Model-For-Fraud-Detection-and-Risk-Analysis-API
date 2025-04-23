@@ -19,16 +19,11 @@ st.set_page_config(
 st.markdown("""
     <style>
     .custom-header {
-        background: linear-gradient(to right, #60629f, #32d16f);
+        background: linear-gradient(to right, #14532d, #166534);
         padding: 2rem;
         border-radius: 12px;
         text-align: center;
         color: white;
-    }
-    @media (prefers-color-scheme: dark) {
-        .custom-header {
-            background: linear-gradient(to right, #14532d, #166534);
-        }
     }
 
     .result-box {
