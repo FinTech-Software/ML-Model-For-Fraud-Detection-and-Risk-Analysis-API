@@ -19,7 +19,7 @@ st.set_page_config(
 st.markdown("""
     <style>
     .custom-header {
-        background: linear-gradient(to right, #14532d, #166534);
+        background: linear-gradient(to right, #0e78b3, #37a963);
         padding: 2rem;
         border-radius: 12px;
         text-align: center;
