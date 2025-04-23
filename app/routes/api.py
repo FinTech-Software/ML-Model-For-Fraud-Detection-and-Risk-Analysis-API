@@ -9,7 +9,7 @@ model = FraudDetectionModel(Config.MODEL_PATH)
 
 @bp.route('/streamlit', methods=['GET'])
 def launch_streamlit():
-    return redirect("https://ml-model-for-fraud-detection-and-risk.onrender.com")
+    return redirect("/")
 
 @bp.route('/predict', methods=['POST'])
 def predict():

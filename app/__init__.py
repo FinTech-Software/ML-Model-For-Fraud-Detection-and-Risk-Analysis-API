@@ -3,12 +3,18 @@ from config import Config
 import threading
 import time
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+api_end_point = os.environ.get("API_END_POINT")
 
 def ping_self():
     while True:
         try:
             print("⏰ Pinging keep-alive endpoint to keep server active...")
-            requests.get("https://ml-model-for-fraud-detection-and-risk.onrender.com/api/keep-alive")
+            requests.get(f"{api_end_point}/api/keep-alive")
         except Exception as e:
             print(f"[Keep-Alive Ping Error] {e}")
         time.sleep(180)

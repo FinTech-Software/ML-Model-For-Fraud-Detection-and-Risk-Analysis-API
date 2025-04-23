@@ -1,5 +1,11 @@
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+api_end_point = os.environ.get("API_END_POINT")
 
 # Page configuration
 st.set_page_config(
@@ -37,7 +43,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # API endpoint
-API_BASE = "https://ml-model-for-fraud-detection-and-risk.onrender.com/api"
+API_BASE = f"{api_end_point}/api"
 
 # Model selector
 st.markdown("""
