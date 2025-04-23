@@ -96,7 +96,7 @@ model_option = st.radio("", ["ML Model", "AI Model (Gemini)"], horizontal=True)
 st.markdown("### 📝 Enter Transaction Details")
 
 user_input = {}
-cols = st.columns(4)
+cols = st.columns(3)
 
 with cols[0]:
     user_input["Transaction_Amount"] = st.number_input("Transaction Amount", value=1200.50, format="%.2f")
@@ -110,14 +110,9 @@ with cols[1]:
     user_input["Amount_to_Balance_Ratio"] = st.slider("Amount to Balance Ratio", 0.0, 1.0, 0.24)
 with cols[2]:
     user_input["Failed_Transaction_Count_7d"] = st.number_input("Failed Transaction Count (7d)", min_value=0, max_value=10, step=1)
-    user_input["Amount_Deviation"] = st.slider("Amount Deviation", 0.0, 1.0, 0.12)
     user_input["Previous_Fraudulent_Activity"] = st.selectbox("Previous Fraudulent Activity", [0, 1])
-    user_input["High_Risk_Category"] = st.selectbox("High Risk Category", [0, 1])
-with cols[3]:
-    user_input["Is_Weekend"] = st.selectbox("Is Weekend", [0, 1])
-    user_input["Hour"] = st.number_input("Hour of Transaction", min_value=0, max_value=23, value=12, step=1)
     user_input["DayOfWeek"] = st.selectbox("Day of Week", [1, 2, 3, 4, 5, 6, 7])
-    user_input["Is_Night"] = st.selectbox("Is Night", [0, 1])
+    user_input["Amount_Deviation"] = st.slider("Amount Deviation", 0.0, 1.0, 0.12)
 
 # Prediction button
 if st.button("🚀 Predict Transaction", use_container_width=True):
