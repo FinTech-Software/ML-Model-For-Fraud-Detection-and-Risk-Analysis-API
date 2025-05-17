@@ -11,7 +11,7 @@ class GeminiPredictor:
         if not api_key:
             raise ValueError("Google Gemini API Key not found.")
         self.client = genai.Client(api_key=api_key)
-        self.model = "gemini-2.5-pro-exp-03-25"
+        self.model = "gemini-2.0-flash"
 
     def analyze_transaction(self, transaction_data: dict) -> dict:
         input_text = (
