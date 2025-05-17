@@ -7,7 +7,7 @@ load_dotenv()
 
 class GeminiPredictor:
     def __init__(self):
-        api_key = os.environ.get("GOOGLE_GEMINI_API_KEY2")
+        api_key = os.environ.get("GOOGLE_GEMINI_API_KEY")
         if not api_key:
             raise ValueError("Google Gemini API Key not found.")
         self.client = genai.Client(api_key=api_key)
